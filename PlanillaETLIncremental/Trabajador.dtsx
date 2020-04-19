@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{7071C564-2200-4624-9C38-029E60D1A6D3}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{3BCC9022-49B2-4B0B-9CB2-38E1A503DF53}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -34,6 +34,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=localhost;Initial Catalog=PlanillaOLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.PlanillaStage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{62A94E09-53BA-4680-B322-47B1FA4B3DB5}"
+      DTS:ObjectName="localhost.PlanillaStage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=PlanillaStage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -73,6 +83,143 @@
           version="1">
           <components>
             <component
+              refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="ActualizarTrabajadorStage"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE TrabajadorStage SET Nombre =?, Apellido=?, Actualizar=1 where IdTrabajadorOriginal = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[Nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[Apellido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Apellido]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[idTrabajador]"
+                      cachedDataType="i4"
+                      cachedName="idTrabajador"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\PlanillaOLTPaStage\CountInsertTrabajador"
               componentClassID="Microsoft.RowCount"
               contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -82,7 +229,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the variable to hold the row count."
-                  name="VariableName"></property>
+                  name="VariableName">User::CountInsertTrabajador</property>
               </properties>
               <inputs>
                 <input
@@ -102,11 +249,688 @@
               </outputs>
             </component>
             <component
+              refId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="CountInsertTrabajadorDos">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::CountInsertTrabajador</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="CountUpdateTrabajador">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::CountUpdateTrabajador</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PlanillaOLTPaStage\DestinoStage"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DestinoStage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TrabajadorStage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PlanillaOLTPaStage\DestinoStage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[Nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[Apellido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Apellido]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Apellido]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[salario]"
+                      cachedDataType="numeric"
+                      cachedName="salario"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Salario]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[idCargo]"
+                      cachedDataType="i4"
+                      cachedName="idCargo"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdCargo]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idCargo]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[idDepartamento]"
+                      cachedDataType="i4"
+                      cachedName="idDepartamento"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDepartamento]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idDepartamento]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTrabajador]"
+                      cachedDataType="i4"
+                      cachedName="idTrabajador"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajadorOriginal]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[nombreCargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreCargo"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[nombreDepartamento]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreDepartamento"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Departamento]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajador]"
+                      dataType="i4"
+                      name="IdTrabajador" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajadorOriginal]"
+                      dataType="i4"
+                      name="IdTrabajadorOriginal" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Apellido" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdCargo]"
+                      dataType="i4"
+                      name="IdCargo" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Salario]"
+                      dataType="numeric"
+                      name="Salario"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDepartamento]"
+                      dataType="i4"
+                      name="IdDepartamento" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Departamento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Departamento" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Actualizar]"
+                      dataType="bool"
+                      name="Actualizar" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\DestinoStage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PlanillaOLTPaStage\DestinoStage 1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DestinoStage 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TrabajadorStage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PlanillaOLTPaStage\DestinoStage 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[Nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[Apellido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Apellido]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Apellido]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[salario]"
+                      cachedDataType="numeric"
+                      cachedName="salario"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Salario]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[idCargo]"
+                      cachedDataType="i4"
+                      cachedName="idCargo"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdCargo]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idCargo]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[idDepartamento]"
+                      cachedDataType="i4"
+                      cachedName="idDepartamento"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdDepartamento]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idDepartamento]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[idTrabajador]"
+                      cachedDataType="i4"
+                      cachedName="idTrabajador"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajadorOriginal]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[nombreCargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreCargo"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].Columns[nombreDepartamento]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreDepartamento"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Departamento]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajador]"
+                      dataType="i4"
+                      name="IdTrabajador" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdTrabajadorOriginal]"
+                      dataType="i4"
+                      name="IdTrabajadorOriginal" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Apellido" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdCargo]"
+                      dataType="i4"
+                      name="IdCargo" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Salario]"
+                      dataType="numeric"
+                      name="Salario"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[IdDepartamento]"
+                      dataType="i4"
+                      name="IdDepartamento" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Departamento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Departamento" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Actualizar]"
+                      dataType="bool"
+                      name="Actualizar" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\DestinoStage 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\DestinoStage 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\DestinoStage 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\PlanillaOLTPaStage\Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
               name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Trabajador]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Trabajador]) [refTable]
+where [refTable].[salario] = ? and [refTable].[porcentajeComision] = ? and [refTable].[nombreCargo] = ? and [refTable].[nombreDepartamento] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="idTrabajadorDIM" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idTrabajadorOg" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombres" dataType="DT_STR" length="70" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="salario" dataType="DT_NUMERIC" length="0" precision="20" scale="2" codePage="0"/&gt;&lt;referenceColumn name="porcentajeComision" dataType="DT_NUMERIC" length="0" precision="5" scale="2" codePage="0"/&gt;&lt;referenceColumn name="nombreCargo" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombreDepartamento" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PlanillaOLTPaStage\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[salario]"
+                      cachedDataType="numeric"
+                      cachedName="salario"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">salario</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[nombreCargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreCargo"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">nombreCargo</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[nombreDepartamento]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombreDepartamento"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">nombreDepartamento</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[porcenetajeComision]"
+                      cachedDataType="numeric"
+                      cachedName="porcenetajeComision"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">porcentajeComision</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PlanillaOLTPaStage\Lookup ID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup ID"
               usesDispositions="true"
               version="6">
               <properties>
@@ -137,7 +961,7 @@ where [refTable].[idTrabajadorOg] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -170,7 +994,7 @@ where [refTable].[idTrabajadorOg] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\PlanillaOLTPaStage\Lookup.Connections[OleDbConnection]"
+                  refId="Package\PlanillaOLTPaStage\Lookup ID.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   description="Connection manager used to access lookup data."
@@ -178,11 +1002,11 @@ where [refTable].[idTrabajadorOg] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]"
+                  refId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[idTrabajador]"
+                      refId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input].Columns[idTrabajador]"
                       cachedDataType="i4"
                       cachedName="idTrabajador"
                       lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idTrabajador]">
@@ -203,39 +1027,38 @@ where [refTable].[idTrabajadorOg] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -535,10 +1358,45 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
           </components>
           <paths>
             <path
-              refId="Package\PlanillaOLTPaStage.Paths[OLE DB Source Output]"
+              refId="Package\PlanillaOLTPaStage.Paths[Lookup Match Output]"
               endId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Lookup Match Output1]"
+              endId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]"
+              name="Lookup Match Output"
+              startId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output]"
+              endId="Package\PlanillaOLTPaStage\CountInsertTrabajador.Inputs[Row Count Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output1]"
+              endId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Inputs[Row Count Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[OLE DB Source Output]"
+              endId="Package\PlanillaOLTPaStage\Lookup ID.Inputs[Lookup Input]"
               name="OLE DB Source Output"
               startId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Row Count Output 1]"
+              endId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\PlanillaOLTPaStage\CountInsertTrabajador.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Row Count Output 11]"
+              endId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\PlanillaOLTPaStage.Paths[Row Count Output 12]"
+              endId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]"
+              name="Row Count Output 1"
+              startId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -567,18 +1425,18 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
     design-time-name="Package\PlanillaOLTPaStage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="169,42"
           Id="Package\PlanillaOLTPaStage\SourcePlanillaOLTP"
           TopLeft="235,76" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\PlanillaOLTPaStage\Lookup"
+          Size="128,42"
+          Id="Package\PlanillaOLTPaStage\Lookup ID"
           TopLeft="258,209" />
         <EdgeLayout
           Id="Package\PlanillaOLTPaStage.Paths[OLE DB Source Output]"
-          TopLeft="317,118">
+          TopLeft="320.75,118">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -601,13 +1459,270 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
         <NodeLayout
           Size="186,42"
           Id="Package\PlanillaOLTPaStage\CountInsertTrabajador"
-          TopLeft="83,304" />
+          TopLeft="76,395" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output]"
+          TopLeft="302,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-133,144"
+              Start="0,0"
+              End="-133,136.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.6666666666667"
+                    Point2="0,58.6666666666667"
+                    Point3="-4,58.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-129,58.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-129,58.6666666666667"
+                    Point2="-133,58.6666666666667"
+                    Point3="-133,62.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-133,136.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-122.30638671875,63.6666666666667,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="113,42"
+          Id="Package\PlanillaOLTPaStage\Lookup"
+          TopLeft="529,301" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup Match Output]"
+          TopLeft="342,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="243.5,50"
+              Start="0,0"
+              End="243.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3703703703704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3703703703704"
+                    Point2="0,20.3703703703704"
+                    Point3="4,20.3703703703704" />
+                  <mssgle:LineSegment
+                    End="239.5,20.3703703703704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="239.5,20.3703703703704"
+                    Point2="243.5,20.3703703703704"
+                    Point3="243.5,24.3703703703704" />
+                  <mssgle:LineSegment
+                    End="243.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="73.55861328125,25.3703703703704,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="203,42"
+          Id="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos"
+          TopLeft="300,398" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output1]"
+          TopLeft="585.5,343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-184,55"
+              Start="0,0"
+              End="-184,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="-4,27.5" />
+                  <mssgle:LineSegment
+                    End="-180,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-180,27.5"
+                    Point2="-184,27.5"
+                    Point3="-184,31.5" />
+                  <mssgle:LineSegment
+                    End="-184,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-147.80638671875,32.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="141,42"
+          Id="Package\PlanillaOLTPaStage\DestinoStage"
+          TopLeft="97,520" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 1]"
+          TopLeft="168.25,437">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="150,42"
+          Id="Package\PlanillaOLTPaStage\DestinoStage 1"
+          TopLeft="331,523" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 11]"
+          TopLeft="403.75,440">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83"
+              Start="0,0"
+              End="0,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="192,42"
+          Id="Package\PlanillaOLTPaStage\CountUpdateTrabajador"
+          TopLeft="671,401" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup Match Output1]"
+          TopLeft="603,343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="164,58"
+              Start="0,0"
+              End="164,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.6858638743456" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.6858638743456"
+                    Point2="0,23.6858638743456"
+                    Point3="4,23.6858638743456" />
+                  <mssgle:LineSegment
+                    End="160,23.6858638743456" />
+                  <mssgle:CubicBezierSegment
+                    Point1="160,23.6858638743456"
+                    Point2="164,23.6858638743456"
+                    Point3="164,27.6858638743456" />
+                  <mssgle:LineSegment
+                    End="164,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="33.80861328125,28.6858638743456,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="202,42"
+          Id="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage"
+          TopLeft="664,531" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 12]"
+          TopLeft="766,443">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88"
+              Start="0,0"
+              End="0,80.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\PlanillaOLTPaStage\SourcePlanillaOLTP">
     <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PlanillaOLTPaStage\Lookup ID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Trabajador]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -633,6 +1748,32 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PlanillaOLTPaStage\DestinoStage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PlanillaOLTPaStage\DestinoStage 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
