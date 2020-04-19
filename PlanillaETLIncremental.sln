@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "PlanillaETLIncremental", "PlanillaETLIncremental\PlanillaETLIncremental.dtproj", "{67ED7C0E-68DC-459B-81DC-385EF6725787}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67ED7C0E-68DC-459B-81DC-385EF6725787}.Development|Default.ActiveCfg = Development
+		{67ED7C0E-68DC-459B-81DC-385EF6725787}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C65FE6C-ED82-4C71-9A2C-A1C42D75FEF7}
+	EndGlobalSection
+EndGlobal
