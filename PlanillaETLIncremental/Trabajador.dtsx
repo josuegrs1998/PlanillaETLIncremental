@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{3BCC9022-49B2-4B0B-9CB2-38E1A503DF53}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{7F7C10A6-D557-4EED-87A1-F92642B2C1D7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -62,12 +62,29 @@
       DTS:DTSID="{0B3BA71A-AE16-4C1A-B1F6-F7E55A179D21}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="CountUpdateTrabajador">
+      DTS:ObjectName="CountInsertUpdatesTrabajador">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\LimpiarStageTrabajador"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5A4A3166-0BB0-4334-850D-CA04A099B0C6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LimpiarStageTrabajador"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62A94E09-53BA-4680-B322-47B1FA4B3DB5}"
+          SQLTask:SqlStatementSource="DELETE FROM TrabajadorStage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\PlanillaOLTPaStage"
       DTS:CreationName="Microsoft.Pipeline"
@@ -82,143 +99,6 @@
         <pipeline
           version="1">
           <components>
-            <component
-              refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="ActualizarTrabajadorStage"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE TrabajadorStage SET Nombre =?, Apellido=?, Actualizar=1 where IdTrabajadorOriginal = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[Nombre]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Nombre"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
-                    <inputColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[Apellido]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Apellido"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Apellido]" />
-                    <inputColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].Columns[idTrabajador]"
-                      cachedDataType="i4"
-                      cachedName="idTrabajador"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      dataType="i4"
-                      name="Param_2">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
             <component
               refId="Package\PlanillaOLTPaStage\CountInsertTrabajador"
               componentClassID="Microsoft.RowCount"
@@ -258,7 +138,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the variable to hold the row count."
-                  name="VariableName">User::CountInsertTrabajador</property>
+                  name="VariableName">User::CountInsertUpdatesTrabajador</property>
               </properties>
               <inputs>
                 <input
@@ -273,35 +153,6 @@
                   refId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Outputs[Row Count Output 1]"
                   name="Row Count Output 1"
                   synchronousInputId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="CountUpdateTrabajador">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::CountUpdateTrabajador</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]">
                   <externalMetadataColumns />
                 </output>
               </outputs>
@@ -379,14 +230,6 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[Nombre]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Nombre"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
-                    <inputColumn
                       refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[Apellido]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -436,6 +279,22 @@
                       cachedName="nombreDepartamento"
                       externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Departamento]"
                       lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[Nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Nombre]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].Columns[porcentajeComision]"
+                      cachedDataType="numeric"
+                      cachedName="porcentajeComision"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[PorcentajeComision]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcentajeComision]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -486,9 +345,11 @@
                       length="50"
                       name="Departamento" />
                     <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Actualizar]"
-                      dataType="bool"
-                      name="Actualizar" />
+                      refId="Package\PlanillaOLTPaStage\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[PorcentajeComision]"
+                      dataType="numeric"
+                      name="PorcentajeComision"
+                      precision="5"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -697,9 +558,11 @@
                       length="50"
                       name="Departamento" />
                     <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[Actualizar]"
-                      dataType="bool"
-                      name="Actualizar" />
+                      refId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input].ExternalColumns[PorcentajeComision]"
+                      dataType="numeric"
+                      name="PorcentajeComision"
+                      precision="5"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -749,7 +612,7 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Trabajador]) [refTable]
-where [refTable].[salario] = ? and [refTable].[porcentajeComision] = ? and [refTable].[nombreCargo] = ? and [refTable].[nombreDepartamento] = ?</property>
+where [refTable].[salario] = ? and [refTable].[nombreCargo] = ? and [refTable].[nombreDepartamento] = ? and [refTable].[nombres] = ? and [refTable].[porcentajeComision] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -785,7 +648,7 @@ where [refTable].[salario] = ? and [refTable].[porcentajeComision] = ? and [refT
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]};</property>
+                  name="ParameterMap">#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreCargo]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[NombreCompleto]};#{Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcentajeComision]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -863,12 +726,30 @@ where [refTable].[salario] = ? and [refTable].[porcentajeComision] = ? and [refT
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[porcenetajeComision]"
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[NombreCompleto]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">nombres</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\PlanillaOLTPaStage\Lookup.Inputs[Lookup Input].Columns[porcentajeComision]"
                       cachedDataType="numeric"
-                      cachedName="porcenetajeComision"
+                      cachedName="porcentajeComision"
                       cachedPrecision="5"
                       cachedScale="2"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]">
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcentajeComision]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1091,7 +972,7 @@ where [refTable].[idTrabajadorOg] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select T.idTrabajador, T.nombre as Nombre,T.apellido as Apellido, T.salario,T.porcenetajeComision,c.idCargo as idCargo, c.nombreCargo,D.idDepartamento,D.nombreDepartamento
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select T.idTrabajador,T.nombre as Nombre, T.apellido as Apellido ,T.nombre+' '+T.apellido as NombreCompleto, T.salario,T.porcentajeComision,c.idCargo as idCargo, c.nombreCargo,D.idDepartamento,D.nombreDepartamento
 from  PlanillaOLTP.dbo.Trabajador as T
 INNER JOIN PlanillaOLTP.dbo.Cargo as C on T.idCargo = C.idCargo
 INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartamento</property>
@@ -1140,17 +1021,6 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       name="idTrabajador"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[Nombre]"
-                      length="50"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]"
-                      name="Nombre"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Apellido]"
                       codePage="1252"
                       dataType="str"
@@ -1170,17 +1040,6 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[salario]"
                       name="salario"
                       precision="20"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[porcenetajeComision]"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcenetajeComision]"
-                      name="porcenetajeComision"
-                      precision="5"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
@@ -1223,6 +1082,39 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[nombreDepartamento]"
                       name="nombreDepartamento"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[NombreCompleto]"
+                      length="101"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[NombreCompleto]"
+                      name="NombreCompleto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[Nombre]"
+                      length="50"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[Nombre]"
+                      name="Nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcentajeComision]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[porcentajeComision]"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].Columns[porcentajeComision]"
+                      name="porcentajeComision"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1230,12 +1122,6 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[idTrabajador]"
                       dataType="i4"
                       name="idTrabajador" />
-                    <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[Nombre]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Nombre" />
                     <externalMetadataColumn
                       refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[Apellido]"
                       codePage="1252"
@@ -1247,12 +1133,6 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       dataType="numeric"
                       name="salario"
                       precision="20"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[porcenetajeComision]"
-                      dataType="numeric"
-                      name="porcenetajeComision"
-                      precision="5"
                       scale="2" />
                     <externalMetadataColumn
                       refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[idCargo]"
@@ -1274,6 +1154,24 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       dataType="str"
                       length="50"
                       name="nombreDepartamento" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[Nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Output].ExternalColumns[porcentajeComision]"
+                      dataType="numeric"
+                      name="porcentajeComision"
+                      precision="5"
+                      scale="2" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1294,6 +1192,13 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[Nombre]"
                       name="Nombre" />
                     <outputColumn
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[NombreCompleto]"
+                      name="NombreCompleto" />
+                    <outputColumn
                       refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[Apellido]"
                       codePage="1252"
                       dataType="str"
@@ -1308,10 +1213,10 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                       precision="20"
                       scale="2" />
                     <outputColumn
-                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[porcenetajeComision]"
+                      refId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[porcentajeComision]"
                       dataType="numeric"
-                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[porcenetajeComision]"
-                      name="porcenetajeComision"
+                      lineageId="Package\PlanillaOLTPaStage\SourcePlanillaOLTP.Outputs[OLE DB Source Error Output].Columns[porcentajeComision]"
+                      name="porcentajeComision"
                       precision="5"
                       scale="2" />
                     <outputColumn
@@ -1363,11 +1268,6 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
               name="Lookup Match Output"
               startId="Package\PlanillaOLTPaStage\Lookup ID.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\PlanillaOLTPaStage.Paths[Lookup Match Output1]"
-              endId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Inputs[Row Count Input 1]"
-              name="Lookup Match Output"
-              startId="Package\PlanillaOLTPaStage\Lookup.Outputs[Lookup Match Output]" />
-            <path
               refId="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output]"
               endId="Package\PlanillaOLTPaStage\CountInsertTrabajador.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
@@ -1392,16 +1292,468 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
               endId="Package\PlanillaOLTPaStage\DestinoStage 1.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
               startId="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\StageaOlap"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5FA98160-40F5-4E74-A81D-F71A63471ED1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="StageaOlap"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\StageaOlap\Olap"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Olap"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Trabajador]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StageaOlap\Olap.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[Nombres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="Nombres"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombres]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Nombres]" />
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[Salario]"
+                      cachedDataType="numeric"
+                      cachedName="Salario"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[salario]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Salario]" />
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[PorcentajeComision]"
+                      cachedDataType="numeric"
+                      cachedName="PorcentajeComision"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[porcentajeComision]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[PorcentajeComision]" />
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombreCargo]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[Departamento]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Departamento"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombreDepartamento]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Departamento]" />
+                    <inputColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].Columns[IdTrabajadorOriginal]"
+                      cachedDataType="i4"
+                      cachedName="IdTrabajadorOriginal"
+                      externalMetadataColumnId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOg]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[IdTrabajadorOriginal]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorDIM]"
+                      dataType="i4"
+                      name="idTrabajadorDIM" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOg]"
+                      dataType="i4"
+                      name="idTrabajadorOg" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      name="nombres" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[salario]"
+                      dataType="numeric"
+                      name="salario"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[porcentajeComision]"
+                      dataType="numeric"
+                      name="porcentajeComision"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombreCargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombreCargo" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input].ExternalColumns[nombreDepartamento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombreDepartamento" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\StageaOlap\Olap.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StageaOlap\Olap.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\StageaOlap\Olap.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\StageaOlap\Olap.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\StageaOlap\Olap.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\StageaOlap\SourceStage"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SourceStage"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select IdTrabajadorOriginal, Nombre + ' ' + Apellido as Nombres, Cargo, Salario, Departamento, PorcentajeComision 
+from TrabajadorStage</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StageaOlap\SourceStage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[IdTrabajadorOriginal]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[IdTrabajadorOriginal]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[IdTrabajadorOriginal]"
+                      name="IdTrabajadorOriginal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Nombres]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Nombres]"
+                      length="101"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Nombres]"
+                      name="Nombres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      length="50"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      name="Cargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Salario]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Salario]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Salario]"
+                      name="Salario"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Departamento]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Departamento]"
+                      length="50"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[Departamento]"
+                      name="Departamento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[PorcentajeComision]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[PorcentajeComision]"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].Columns[PorcentajeComision]"
+                      name="PorcentajeComision"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[IdTrabajadorOriginal]"
+                      dataType="i4"
+                      name="IdTrabajadorOriginal" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Nombres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="Nombres" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Salario]"
+                      dataType="numeric"
+                      name="Salario"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[Departamento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Departamento" />
+                    <externalMetadataColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output].ExternalColumns[PorcentajeComision]"
+                      dataType="numeric"
+                      name="PorcentajeComision"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[IdTrabajadorOriginal]"
+                      dataType="i4"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[IdTrabajadorOriginal]"
+                      name="IdTrabajadorOriginal" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Nombres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Nombres]"
+                      name="Nombres" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      name="Cargo" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Salario]"
+                      dataType="numeric"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Salario]"
+                      name="Salario"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Departamento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[Departamento]"
+                      name="Departamento" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[PorcentajeComision]"
+                      dataType="numeric"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[PorcentajeComision]"
+                      name="PorcentajeComision"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
             <path
-              refId="Package\PlanillaOLTPaStage.Paths[Row Count Output 12]"
-              endId="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage.Inputs[OLE DB Command Input]"
-              name="Row Count Output 1"
-              startId="Package\PlanillaOLTPaStage\CountUpdateTrabajador.Outputs[Row Count Output 1]" />
+              refId="Package\StageaOlap.Paths[OLE DB Source Output]"
+              endId="Package\StageaOlap\Olap.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StageaOlap\SourceStage.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0FBD9E08-9B93-4516-8CCC-CAD315CB62BA}"
+      DTS:From="Package\PlanillaOLTPaStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\StageaOlap" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DD30ACA7-A83C-4CFF-824C-A4CCBD0E25B7}"
+      DTS:From="Package\StageaOlap"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\LimpiarStageTrabajador" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -1413,41 +1765,29 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="169,42"
           Id="Package\PlanillaOLTPaStage"
-          TopLeft="402,77" />
-      </GraphLayout>
-    </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\PlanillaOLTPaStage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+          TopLeft="389,75" />
         <NodeLayout
-          Size="169,42"
-          Id="Package\PlanillaOLTPaStage\SourcePlanillaOLTP"
-          TopLeft="235,76" />
-        <NodeLayout
-          Size="128,42"
-          Id="Package\PlanillaOLTPaStage\Lookup ID"
-          TopLeft="258,209" />
+          Size="133,42"
+          Id="Package\StageaOlap"
+          TopLeft="407,183" />
         <EdgeLayout
-          Id="Package\PlanillaOLTPaStage.Paths[OLE DB Source Output]"
-          TopLeft="320.75,118">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="473.5,117">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,91"
+              EndConnector="0,66"
               Start="0,0"
-              End="0,83.5">
+              End="0,58.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,83.5" />
+                    End="0,58.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1457,89 +1797,67 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="186,42"
-          Id="Package\PlanillaOLTPaStage\CountInsertTrabajador"
-          TopLeft="76,395" />
+          Size="191,42"
+          Id="Package\LimpiarStageTrabajador"
+          TopLeft="384,290" />
         <EdgeLayout
-          Id="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output]"
-          TopLeft="302,251">
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="476.5,225">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-133,144"
+              EndConnector="0,65"
               Start="0,0"
-              End="-133,136.5">
+              End="0,57.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,54.6666666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,54.6666666666667"
-                    Point2="0,58.6666666666667"
-                    Point3="-4,58.6666666666667" />
-                  <mssgle:LineSegment
-                    End="-129,58.6666666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-129,58.6666666666667"
-                    Point2="-133,58.6666666666667"
-                    Point3="-133,62.6666666666667" />
-                  <mssgle:LineSegment
-                    End="-133,136.5" />
+                    End="0,57.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-122.30638671875,63.6666666666667,111.6127734375,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\PlanillaOLTPaStage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="113,42"
-          Id="Package\PlanillaOLTPaStage\Lookup"
-          TopLeft="529,301" />
-        <EdgeLayout
-          Id="Package\PlanillaOLTPaStage.Paths[Lookup Match Output]"
-          TopLeft="342,251">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="243.5,50"
-              Start="0,0"
-              End="243.5,42.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.3703703703704" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.3703703703704"
-                    Point2="0,20.3703703703704"
-                    Point3="4,20.3703703703704" />
-                  <mssgle:LineSegment
-                    End="239.5,20.3703703703704" />
-                  <mssgle:CubicBezierSegment
-                    Point1="239.5,20.3703703703704"
-                    Point2="243.5,20.3703703703704"
-                    Point3="243.5,24.3703703703704" />
-                  <mssgle:LineSegment
-                    End="243.5,42.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="73.55861328125,25.3703703703704,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="141,42"
+          Id="Package\PlanillaOLTPaStage\DestinoStage"
+          TopLeft="97,520" />
         <NodeLayout
           Size="203,42"
           Id="Package\PlanillaOLTPaStage\CountInsertTrabajadorDos"
           TopLeft="300,398" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\PlanillaOLTPaStage\SourcePlanillaOLTP"
+          TopLeft="236,97" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\PlanillaOLTPaStage\CountInsertTrabajador"
+          TopLeft="76,395" />
+        <NodeLayout
+          Size="128,42"
+          Id="Package\PlanillaOLTPaStage\Lookup ID"
+          TopLeft="258,209" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\PlanillaOLTPaStage\Lookup"
+          TopLeft="529,301" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\PlanillaOLTPaStage\DestinoStage 1"
+          TopLeft="331,523" />
         <EdgeLayout
           Id="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output1]"
           TopLeft="585.5,343">
@@ -1576,10 +1894,78 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="141,42"
-          Id="Package\PlanillaOLTPaStage\DestinoStage"
-          TopLeft="97,520" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup No Match Output]"
+          TopLeft="302,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-133,144"
+              Start="0,0"
+              End="-133,136.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.6666666666667"
+                    Point2="0,58.6666666666667"
+                    Point3="-4,58.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-129,58.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-129,58.6666666666667"
+                    Point2="-133,58.6666666666667"
+                    Point3="-133,62.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-133,136.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-122.30638671875,63.6666666666667,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[Lookup Match Output]"
+          TopLeft="342,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="243.5,50"
+              Start="0,0"
+              End="243.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3703703703704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3703703703704"
+                    Point2="0,20.3703703703704"
+                    Point3="4,20.3703703703704" />
+                  <mssgle:LineSegment
+                    End="239.5,20.3703703703704" />
+                  <mssgle:CubicBezierSegment
+                    Point1="239.5,20.3703703703704"
+                    Point2="243.5,20.3703703703704"
+                    Point3="243.5,24.3703703703704" />
+                  <mssgle:LineSegment
+                    End="243.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="73.55861328125,25.3703703703704,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 1]"
           TopLeft="168.25,437">
@@ -1602,10 +1988,28 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="150,42"
-          Id="Package\PlanillaOLTPaStage\DestinoStage 1"
-          TopLeft="331,523" />
+        <EdgeLayout
+          Id="Package\PlanillaOLTPaStage.Paths[OLE DB Source Output]"
+          TopLeft="321.25,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 11]"
           TopLeft="403.75,440">
@@ -1628,75 +2032,22 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="192,42"
-          Id="Package\PlanillaOLTPaStage\CountUpdateTrabajador"
-          TopLeft="671,401" />
-        <EdgeLayout
-          Id="Package\PlanillaOLTPaStage.Paths[Lookup Match Output1]"
-          TopLeft="603,343">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="164,58"
-              Start="0,0"
-              End="164,50.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.6858638743456" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.6858638743456"
-                    Point2="0,23.6858638743456"
-                    Point3="4,23.6858638743456" />
-                  <mssgle:LineSegment
-                    End="160,23.6858638743456" />
-                  <mssgle:CubicBezierSegment
-                    Point1="160,23.6858638743456"
-                    Point2="164,23.6858638743456"
-                    Point3="164,27.6858638743456" />
-                  <mssgle:LineSegment
-                    End="164,50.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="33.80861328125,28.6858638743456,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="202,42"
-          Id="Package\PlanillaOLTPaStage\ActualizarTrabajadorStage"
-          TopLeft="664,531" />
-        <EdgeLayout
-          Id="Package\PlanillaOLTPaStage.Paths[Row Count Output 12]"
-          TopLeft="766,443">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,88"
-              Start="0,0"
-              End="0,80.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,80.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PlanillaOLTPaStage\DestinoStage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\PlanillaOLTPaStage\SourcePlanillaOLTP">
     <Properties>
@@ -1744,7 +2095,7 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1752,7 +2103,7 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\PlanillaOLTPaStage\DestinoStage">
+    design-time-name="Package\PlanillaOLTPaStage\DestinoStage 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1764,8 +2115,54 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\StageaOlap">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="138,42"
+          Id="Package\StageaOlap\SourceStage"
+          TopLeft="386,80" />
+        <NodeLayout
+          Size="100,42"
+          Id="Package\StageaOlap\Olap"
+          TopLeft="403,189" />
+        <EdgeLayout
+          Id="Package\StageaOlap.Paths[OLE DB Source Output]"
+          TopLeft="454,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\PlanillaOLTPaStage\DestinoStage 1">
+    design-time-name="Package\StageaOlap\SourceStage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\StageaOlap\Olap">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
