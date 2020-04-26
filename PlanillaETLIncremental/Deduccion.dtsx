@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{E5B9BBE2-36C6-4D3E-95A7-5FCB8E0CEDD3}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{A780882B-0FF7-4B21-A4A9-FC0D33721F29}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -100,6 +100,26 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{368BB768-BA07-4392-B444-2EE1F6211A65}"
           SQLTask:SqlStatementSource="DELETE FROM TipoDeduccion" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LogDeduccion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BAB40431-7A72-4B38-B9E1-E0608311026A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LogDeduccion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"INSERT INTO LogETL (Fecha, Descripcion, Insercion)
+SELECT GETDATE(), 'Insercion de datos Deduccion y Tipo Deduccionl',"+ (DT_WSTR, 12) ( @[User::countInsertDeduccion]+ @[User::countInsertTipo])</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F499C0E-E6BA-43D8-A219-9B771708B235}"
+          SQLTask:SqlStatementSource="INSERT INTO LogETL (Fecha, Descripcion, Insercion)&#xA;SELECT GETDATE(), 'Insercion de datos Deduccion y Tipo Deduccionl',0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1900,6 +1920,14 @@ where IdDeduccionOg not in (select idDeduccionOg from PlanillaOLAP.dbo.Deduccion
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\LimpiarDeduccionStage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{C63532CB-5BC0-49FE-90C5-B38ACF5565DE}"
+      DTS:From="Package\LimpiarDeduccionStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\LogDeduccion" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2024,33 +2052,47 @@ where IdDeduccionOg not in (select idDeduccionOg from PlanillaOLAP.dbo.Deduccion
         <NodeLayout
           Size="189,42"
           Id="Package\LimpiarDeduccionStage"
-          TopLeft="507,460.833333333333" />
+          TopLeft="500,435.833333333333" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="592.666666666667,406.833333333333">
+          TopLeft="593.583333333333,406.833333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="8.83333333333303,54"
+              EndConnector="0,29"
               Start="0,0"
-              End="8.83333333333303,46.5">
+              End="0,21.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23"
-                    Point2="0,27"
-                    Point3="4,27" />
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="145,42"
+          Id="Package\LogDeduccion"
+          TopLeft="519,512" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="593,477.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.166666666667"
+              Start="0,0"
+              End="0,26.666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="4.83333333333303,27" />
-                  <mssgle:CubicBezierSegment
-                    Point1="4.83333333333303,27"
-                    Point2="8.83333333333303,27"
-                    Point3="8.83333333333303,31" />
-                  <mssgle:LineSegment
-                    End="8.83333333333303,46.5" />
+                    End="0,26.666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

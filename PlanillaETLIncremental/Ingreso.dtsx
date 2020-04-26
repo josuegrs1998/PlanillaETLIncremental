@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{FA4F35F5-2CE3-486D-A8BF-DE1658F65E9C}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{7C980B94-618C-4904-9D53-F5FDA9F3A513}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -100,6 +100,26 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{18D2EF67-D20B-4A29-AF8E-0CA13FFAE73A}"
           SQLTask:SqlStatementSource="DELETE FROM TipoIngreso" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LogIngreso"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{88e19fc7-6f63-49b6-8584-59c12f31ddd1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LogIngreso"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"INSERT INTO LogETL (Fecha, Descripcion, Insercion)
+SELECT GETDATE(), 'Insercion de datos Ingreso y Tipo Ingreso',"+ (DT_WSTR, 12) ( @[User::CountInsertIngreso]+ @[User::CountInsertTipo] )</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{31287925-AB62-4B4A-B867-D8F5E845EF86}"
+          SQLTask:SqlStatementSource="INSERT INTO LogETL (Fecha, Descripcion, Insercion)&#xA;SELECT GETDATE(), 'Insercion de datos Ingreso y Tipo Ingreso',0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1945,6 +1965,14 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\LimpiarIngresoStage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{B8352FDA-969D-423F-9430-B5EC33781396}"
+      DTS:From="Package\LimpiarIngresoStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\LogIngreso" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2092,6 +2120,32 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="132,42"
+          Id="Package\LogIngreso"
+          TopLeft="427,523" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="491,488">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2105,10 +2159,6 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
           Id="Package\OLTPaStageIngreso\DestinoStage"
           TopLeft="233,391" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\OLTPaStageIngreso\Lookup"
-          TopLeft="367,187" />
-        <NodeLayout
           Size="172,42"
           Id="Package\OLTPaStageIngreso\SourceOLTPIngreso"
           TopLeft="331,67" />
@@ -2116,6 +2166,10 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
           Size="170,42"
           Id="Package\OLTPaStageIngreso\CountInsertIngreso"
           TopLeft="230,285" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\OLTPaStageIngreso\Lookup"
+          TopLeft="367,187" />
         <EdgeLayout
           Id="Package\OLTPaStageIngreso.Paths[Row Count Output 1]"
           TopLeft="315,327">
@@ -2147,7 +2201,9 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2169,7 +2225,9 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2225,6 +2283,14 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\OLTPaStageIngreso\SourceOLTPIngreso">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\OLTPaStageIngreso\Lookup">
     <Properties>
       <Property>
@@ -2242,14 +2308,6 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
         <Value
           type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageIngreso\SourceOLTPIngreso">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -2416,7 +2474,7 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
     design-time-name="Package\StageAOLAP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\StageAOLAP\SourceStageIngreso"
@@ -2444,9 +2502,7 @@ Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-15.45359375,24.9658203125,30.9071875,9.568359375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
