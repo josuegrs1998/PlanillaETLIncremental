@@ -7,12 +7,12 @@
   DTS:CreatorName="UBEERMAN\josue"
   DTS:DTSID="{EE9F1992-4351-42DF-AC5B-5353616970D9}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.93"
+  DTS:LastModifiedProductVersion="15.0.2000.71"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{5EB4E91A-AE0A-4C2A-B1D0-7C7903B4F44B}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{FA4F35F5-2CE3-486D-A8BF-DE1658F65E9C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -243,6 +243,18 @@
                       cachedName="horasExtras"
                       externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[CantidadHorasExtras]"
                       lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[horasExtras]" />
+                    <inputColumn
+                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTipoIngreso]"
+                      cachedDataType="i4"
+                      cachedName="idTipoIngreso"
+                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoIngreso]"
+                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngreso]" />
+                    <inputColumn
+                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[fechaDeEmision]"
+                      cachedDataType="dbDate"
+                      cachedName="fechaDeEmision"
+                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -269,11 +281,13 @@
                       dataType="i4"
                       name="CantidadHorasExtras" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[TipoIngreso]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="TipoIngreso" />
+                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoIngreso]"
+                      dataType="i4"
+                      name="idTipoIngreso" />
+                    <externalMetadataColumn
+                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      dataType="dbDate"
+                      name="Fecha" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1313,17 +1327,17 @@ where [refTable].[idTipoIngresoOg] = ? and [refTable].[tipoIngreso] = ?</propert
                       externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
                       lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[fecha]" />
                     <inputColumn
-                      refId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].Columns[idTipoIngreso]"
-                      cachedDataType="i4"
-                      cachedName="idTipoIngreso"
-                      externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[idTipoIngresoDIM]"
-                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngreso]" />
-                    <inputColumn
                       refId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].Columns[CantidadHorasExtras]"
                       cachedDataType="i4"
                       cachedName="CantidadHorasExtras"
                       externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[cantidadHorasExtra]"
                       lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[CantidadHorasExtras]" />
+                    <inputColumn
+                      refId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].Columns[idTipoIngresoDIM]"
+                      cachedDataType="i4"
+                      cachedName="idTipoIngresoDIM"
+                      externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[idTipoIngresoDIM]"
+                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngresoDIM]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1406,10 +1420,12 @@ where [refTable].[idTipoIngresoOg] = ? and [refTable].[tipoIngreso] = ?</propert
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select IdIngresoOg, DimT.idTrabajadorDIM ,fecha ,idTipoIngreso, Monto,CantidadHorasExtras 
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select IdIngresoOg, DimT.idTrabajadorDIM ,fecha ,DimTI.idTipoIngresoDIM, Monto,CantidadHorasExtras 
 from IngresoStage as Ist
 outer apply ( Select top 1 olap.IdTrabajadorDIM from PlanillaOLAP.dbo.Trabajador as olap  where  Ist.IdTrabajadorOriginal = olap.IdTrabajadorOg 
-Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
+Order By olap.idTrabajadorDIM DESC  ) as DimT
+outer apply ( Select top 1 olap.idTipoIngresoDIM from PlanillaOLAP.dbo.TipoIngreso as olap  where  Ist.idTipoIngreso = olap.idTipoIngresoDIM 
+Order By olap.idTipoIngresoDIM DESC  ) as DimTI</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1464,15 +1480,6 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
                       name="idTrabajadorDIM"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngreso]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoIngreso]"
-                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngreso]"
-                      name="idTipoIngreso"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[Monto]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
@@ -1501,6 +1508,15 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
                       lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[fecha]"
                       name="fecha"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngresoDIM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoIngresoDIM]"
+                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoIngresoDIM]"
+                      name="idTipoIngresoDIM"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1512,10 +1528,6 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
                       refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTrabajadorDIM]"
                       dataType="i4"
                       name="idTrabajadorDIM" />
-                    <externalMetadataColumn
-                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoIngreso]"
-                      dataType="i4"
-                      name="idTipoIngreso" />
                     <externalMetadataColumn
                       refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[Monto]"
                       dataType="numeric"
@@ -1530,6 +1542,10 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
                       refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[fecha]"
                       dataType="dbDate"
                       name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoIngresoDIM]"
+                      dataType="i4"
+                      name="idTipoIngresoDIM" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1553,10 +1569,10 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
                       lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[fecha]"
                       name="fecha" />
                     <outputColumn
-                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoIngreso]"
+                      refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoIngresoDIM]"
                       dataType="i4"
-                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoIngreso]"
-                      name="idTipoIngreso" />
+                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoIngresoDIM]"
+                      name="idTipoIngresoDIM" />
                     <outputColumn
                       refId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Error Output].Columns[Monto]"
                       dataType="numeric"
@@ -1943,27 +1959,27 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="176,41.6"
+          Size="176,42"
           Id="Package\LimpiarIngresoStage"
           TopLeft="401,446" />
         <NodeLayout
-          Size="196,41.6"
+          Size="196,42"
           Id="Package\LimpiarTipoIngresoStage"
           TopLeft="388,212" />
         <NodeLayout
-          Size="172,41.6"
+          Size="172,42"
           Id="Package\OLTPaStageIngreso"
           TopLeft="406,294" />
         <NodeLayout
-          Size="188.8,41.6"
+          Size="189,42"
           Id="Package\OLTPaStageTipoIngeso"
           TopLeft="389,64" />
         <NodeLayout
-          Size="136.8,41.6"
+          Size="137,42"
           Id="Package\StageAOLAP"
           TopLeft="422,371" />
         <NodeLayout
-          Size="188.8,41.6"
+          Size="189,42"
           Id="Package\StageaOlapTipoIngreso"
           TopLeft="392,133" />
         <EdgeLayout
@@ -2085,13 +2101,55 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,42"
-          Id="Package\OLTPaStageIngreso\SourceOLTPIngreso"
-          TopLeft="331,67" />
+          Size="141,42"
+          Id="Package\OLTPaStageIngreso\DestinoStage"
+          TopLeft="233,391" />
         <NodeLayout
           Size="113,42"
           Id="Package\OLTPaStageIngreso\Lookup"
           TopLeft="367,187" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\OLTPaStageIngreso\SourceOLTPIngreso"
+          TopLeft="331,67" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\OLTPaStageIngreso\CountInsertIngreso"
+          TopLeft="230,285" />
+        <EdgeLayout
+          Id="Package\OLTPaStageIngreso.Paths[Row Count Output 1]"
+          TopLeft="315,327">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.5,64"
+              Start="0,0"
+              End="-11.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="-4,32" />
+                  <mssgle:LineSegment
+                    End="-7.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.5,32"
+                    Point2="-11.5,32"
+                    Point3="-11.5,36" />
+                  <mssgle:LineSegment
+                    End="-11.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\OLTPaStageIngreso.Paths[OLE DB Source Output]"
           TopLeft="420.25,109">
@@ -2114,10 +2172,6 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="170,42"
-          Id="Package\OLTPaStageIngreso\CountInsertIngreso"
-          TopLeft="230,285" />
         <EdgeLayout
           Id="Package\OLTPaStageIngreso.Paths[Lookup No Match Output]"
           TopLeft="423.5,229">
@@ -2154,44 +2208,6 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="141,42"
-          Id="Package\OLTPaStageIngreso\DestinoStage"
-          TopLeft="233,391" />
-        <EdgeLayout
-          Id="Package\OLTPaStageIngreso.Paths[Row Count Output 1]"
-          TopLeft="315,327">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-11.5,64"
-              Start="0,0"
-              End="-11.5,56.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,28"
-                    Point2="0,32"
-                    Point3="-4,32" />
-                  <mssgle:LineSegment
-                    End="-7.5,32" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.5,32"
-                    Point2="-11.5,32"
-                    Point3="-11.5,36" />
-                  <mssgle:LineSegment
-                    End="-11.5,56.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -2205,14 +2221,6 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageIngreso\SourceOLTPIngreso">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2234,6 +2242,14 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
         <Value
           type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\OLTPaStageIngreso\SourceOLTPIngreso">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -2279,7 +2295,9 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2337,7 +2355,9 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2396,7 +2416,7 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
     design-time-name="Package\StageAOLAP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="174,42"
           Id="Package\StageAOLAP\SourceStageIngreso"
@@ -2424,7 +2444,9 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,24.9658203125,30.9071875,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2455,15 +2477,15 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
     design-time-name="Package\StageaOlapTipoIngreso">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="194,42"
-          Id="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage"
-          TopLeft="333,60" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="160,42"
           Id="Package\StageaOlapTipoIngreso\TipoIngresoOLAP"
           TopLeft="377,169" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage"
+          TopLeft="333,60" />
         <EdgeLayout
           Id="Package\StageaOlapTipoIngreso.Paths[OLE DB Source Output]"
           TopLeft="430,102">
@@ -2495,7 +2517,9 @@ Order By olap.idTrabajadorDIM DESC  ) as DimT</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

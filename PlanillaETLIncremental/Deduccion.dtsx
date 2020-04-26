@@ -7,12 +7,12 @@
   DTS:CreatorName="UBEERMAN\josue"
   DTS:DTSID="{2996D7B9-318D-4814-A56E-DF48DB5BC66C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.93"
+  DTS:LastModifiedProductVersion="15.0.2000.71"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{7BA4F765-DB3A-418E-BE51-A72BA0595E8B}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{55E8F108-5FD9-4671-AE55-954B1BDA23DB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -69,47 +69,30 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\LimpiarIngresoStage"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{db1607a5-4db4-4121-aca0-d8daf78b5300}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="LimpiarIngresoStage"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{18D2EF67-D20B-4A29-AF8E-0CA13FFAE73A}"
-          SQLTask:SqlStatementSource="DELETE FROM DeduccionStage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\LimpiarTipoIngresoStage"
+      DTS:refId="Package\LimpiarTipoDeduccionStage"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{e30e7ad1-f9cc-44af-b820-81ee90d2f934}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="LimpiarTipoIngresoStage"
+      DTS:ObjectName="LimpiarTipoDeduccionStage"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{18D2EF67-D20B-4A29-AF8E-0CA13FFAE73A}"
+          SQLTask:Connection="{368BB768-BA07-4392-B444-2EE1F6211A65}"
           SQLTask:SqlStatementSource="DELETE FROM TipoDeduccion" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\OLTPaStageIngreso"
+      DTS:refId="Package\OLTPaStageDeduccion"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{e895110b-77f7-4b70-ab9c-0614c2cd9ccc}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="OLTPaStageIngreso"
+      DTS:ObjectName="OLTPaStageDeduccion"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -117,11 +100,11 @@
           version="1">
           <components>
             <component
-              refId="Package\OLTPaStageIngreso\CountInsertIngreso"
+              refId="Package\OLTPaStageDeduccion\CountInsertDeduccion"
               componentClassID="Microsoft.RowCount"
               contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="CountInsertIngreso">
+              name="CountInsertDeduccion">
               <properties>
                 <property
                   dataType="System.String"
@@ -130,7 +113,7 @@
               </properties>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageIngreso\CountInsertIngreso.Inputs[Row Count Input 1]"
+                  refId="Package\OLTPaStageDeduccion\CountInsertDeduccion.Inputs[Row Count Input 1]"
                   hasSideEffects="true"
                   name="Row Count Input 1">
                   <externalMetadataColumns />
@@ -138,15 +121,15 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageIngreso\CountInsertIngreso.Outputs[Row Count Output 1]"
+                  refId="Package\OLTPaStageDeduccion\CountInsertDeduccion.Outputs[Row Count Output 1]"
                   name="Row Count Output 1"
-                  synchronousInputId="Package\OLTPaStageIngreso\CountInsertIngreso.Inputs[Row Count Input 1]">
+                  synchronousInputId="Package\OLTPaStageDeduccion\CountInsertDeduccion.Inputs[Row Count Input 1]">
                   <externalMetadataColumns />
                 </output>
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageIngreso\DestinoStage"
+              refId="Package\OLTPaStageDeduccion\DestinoStage"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -203,7 +186,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageIngreso\DestinoStage.Connections[OleDbConnection]"
+                  refId="Package\OLTPaStageDeduccion\DestinoStage.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
                   description="The OLE DB runtime connection used to access the database."
@@ -211,71 +194,71 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input]"
+                  refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[monto]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[monto]"
                       cachedDataType="numeric"
                       cachedName="monto"
                       cachedPrecision="10"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Monto]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[monto]" />
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Monto]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[monto]" />
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
                       cachedDataType="i4"
                       cachedName="idTipoDeduccion"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTipoDeduccion]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTipoDeduccion]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[idDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[idDeduccion]"
                       cachedDataType="i4"
                       cachedName="idDeduccion"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccionOg]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idDeduccion]" />
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccionOg]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idDeduccion]" />
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTrabajador]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTrabajador]"
                       cachedDataType="i4"
                       cachedName="idTrabajador"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOG]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOG]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTrabajador]" />
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].Columns[fechaDeEmision]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[fechaDeEmision]"
                       cachedDataType="dbDate"
                       cachedName="fechaDeEmision"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]" />
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[fechaDeEmision]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccion]"
                       dataType="i4"
                       name="IdDeduccion" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccionOg]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdDeduccionOg]"
                       dataType="i4"
                       name="IdDeduccionOg" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOG]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTrabajadorOG]"
                       dataType="i4"
                       name="idTrabajadorOG" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTipoDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[IdTipoDeduccion]"
                       dataType="i4"
                       name="IdTipoDeduccion" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Monto]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Monto]"
                       dataType="numeric"
                       name="Monto"
                       precision="10"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
                       dataType="dbDate"
                       name="Fecha" />
                   </externalMetadataColumns>
@@ -283,22 +266,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageIngreso\DestinoStage.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\OLTPaStageDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -307,7 +290,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageIngreso\Lookup"
+              refId="Package\OLTPaStageDeduccion\Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
@@ -320,14 +303,14 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Deduccion]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DeduccionStage]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Deduccion]) [refTable]
-where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeduccion] = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DeduccionStage]) [refTable]
+where [refTable].[idTrabajadorOG] = ? and [refTable].[Fecha] = ? and [refTable].[Monto] = ? and [refTable].[IdDeduccionOg] = ? and [refTable].[IdTipoDeduccion] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -358,12 +341,12 @@ where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeducc
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="idDeduccion" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idTrabajadorDIM" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Fecha" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idTipoDeduccionDIM" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="monto" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="IdDeduccion" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IdDeduccionOg" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idTrabajadorOG" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IdTipoDeduccion" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Monto" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;referenceColumn name="Fecha" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]};#{Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[monto]};#{Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idDeduccion]};</property>
+                  name="ParameterMap">#{Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTrabajador]};#{Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[fechaDeEmision]};#{Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[monto]};#{Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idDeduccion]};#{Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -375,40 +358,22 @@ where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeducc
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageIngreso\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  refId="Package\OLTPaStageDeduccion\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaStage]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input]"
+                  refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input].Columns[monto]"
-                      cachedDataType="numeric"
-                      cachedName="monto"
-                      cachedPrecision="10"
-                      cachedScale="2"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[monto]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">monto</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input].Columns[fechaDeEmision]"
+                      refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input].Columns[fechaDeEmision]"
                       cachedDataType="dbDate"
                       cachedName="fechaDeEmision"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]">
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[fechaDeEmision]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -421,15 +386,65 @@ where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeducc
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input].Columns[idDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input].Columns[idTrabajador]"
                       cachedDataType="i4"
-                      cachedName="idDeduccion"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idDeduccion]">
+                      cachedName="idTrabajador"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTrabajador]">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">idDeduccion</property>
+                          name="JoinToReferenceColumn">idTrabajadorOG</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input].Columns[monto]"
+                      cachedDataType="numeric"
+                      cachedName="monto"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[monto]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Monto</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input].Columns[idDeduccion]"
+                      cachedDataType="i4"
+                      cachedName="idDeduccion"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idDeduccion]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">IdDeduccionOg</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input].Columns[idTipoDeduccion]"
+                      cachedDataType="i4"
+                      cachedName="idTipoDeduccion"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">IdTipoDeduccion</property>
                         <property
                           dataType="System.Null"
                           description="Specifies the column in the reference table from which a column is copied."
@@ -442,54 +457,38 @@ where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeducc
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Match Output].Columns[idDeduccion]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Match Output].Columns[idDeduccion]"
-                      name="idDeduccion"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">idDeduccion</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
+                  synchronousInputId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -498,11 +497,11 @@ where [refTable].[Fecha] = ? and [refTable].[monto] = ? and [refTable].[idDeducc
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageIngreso\SourceOLTPIngreso"
+              refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="SourceOLTPIngreso"
+              name="SourceOLTPDeduccion"
               usesDispositions="true"
               version="7">
               <properties>
@@ -551,133 +550,133 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
+                  refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLTP]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output]"
+                  refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTrabajador]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTrabajador]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTrabajador]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTrabajador]"
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTrabajador]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTrabajador]"
                       name="idTrabajador"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[fechaDeEmision]"
                       dataType="dbDate"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[fechaDeEmision]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[fechaDeEmision]"
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[fechaDeEmision]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[fechaDeEmision]"
                       name="fechaDeEmision"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[monto]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[monto]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[monto]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[monto]"
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[monto]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[monto]"
                       name="monto"
                       precision="10"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idDeduccion]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idDeduccion]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idDeduccion]"
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idDeduccion]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idDeduccion]"
                       name="idDeduccion"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      externalMetadataColumnId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTrabajador]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTrabajador]"
                       dataType="i4"
                       name="idTrabajador" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[fechaDeEmision]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[fechaDeEmision]"
                       dataType="dbDate"
                       name="fechaDeEmision" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[monto]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[monto]"
                       dataType="numeric"
                       name="monto"
                       precision="10"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idDeduccion]"
                       dataType="i4"
                       name="idDeduccion" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
                       dataType="i4"
                       name="idTipoDeduccion" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output]"
+                  refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idDeduccion]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idDeduccion]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idDeduccion]"
                       name="idDeduccion" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idTrabajador]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idTrabajador]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idTrabajador]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idTrabajador]"
                       name="idTrabajador" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[fechaDeEmision]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[fechaDeEmision]"
                       dataType="dbDate"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[fechaDeEmision]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[fechaDeEmision]"
                       name="fechaDeEmision" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[monto]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[monto]"
                       dataType="numeric"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[monto]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[monto]"
                       name="monto"
                       precision="10"
                       scale="2" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -688,32 +687,32 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
           </components>
           <paths>
             <path
-              refId="Package\OLTPaStageIngreso.Paths[Lookup No Match Output]"
-              endId="Package\OLTPaStageIngreso\CountInsertIngreso.Inputs[Row Count Input 1]"
+              refId="Package\OLTPaStageDeduccion.Paths[Lookup No Match Output]"
+              endId="Package\OLTPaStageDeduccion\CountInsertDeduccion.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
-              startId="Package\OLTPaStageIngreso\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\OLTPaStageDeduccion\Lookup.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\OLTPaStageIngreso.Paths[OLE DB Source Output]"
-              endId="Package\OLTPaStageIngreso\Lookup.Inputs[Lookup Input]"
+              refId="Package\OLTPaStageDeduccion.Paths[OLE DB Source Output]"
+              endId="Package\OLTPaStageDeduccion\Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\OLTPaStageIngreso\SourceOLTPIngreso.Outputs[OLE DB Source Output]" />
+              startId="Package\OLTPaStageDeduccion\SourceOLTPDeduccion.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\OLTPaStageIngreso.Paths[Row Count Output 1]"
-              endId="Package\OLTPaStageIngreso\DestinoStage.Inputs[OLE DB Destination Input]"
+              refId="Package\OLTPaStageDeduccion.Paths[Row Count Output 1]"
+              endId="Package\OLTPaStageDeduccion\DestinoStage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\OLTPaStageIngreso\CountInsertIngreso.Outputs[Row Count Output 1]" />
+              startId="Package\OLTPaStageDeduccion\CountInsertDeduccion.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\OLTPaStageTipoIngeso"
+      DTS:refId="Package\OLTPaStageTipoDeduccion"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{377a0eec-061f-405d-824e-2f4ccd8114b1}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="OLTPaStageTipoIngeso"
+      DTS:ObjectName="OLTPaStageTipoDeduccion"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -721,11 +720,11 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
           version="1">
           <components>
             <component
-              refId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso"
+              refId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion"
               componentClassID="Microsoft.RowCount"
               contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="ContarInsertTipoIngreso">
+              name="ContarInsertTipoDeduccion">
               <properties>
                 <property
                   dataType="System.String"
@@ -734,7 +733,7 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </properties>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso.Inputs[Row Count Input 1]"
+                  refId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion.Inputs[Row Count Input 1]"
                   hasSideEffects="true"
                   name="Row Count Input 1">
                   <externalMetadataColumns />
@@ -742,15 +741,15 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso.Outputs[Row Count Output 1]"
+                  refId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion.Outputs[Row Count Output 1]"
                   name="Row Count Output 1"
-                  synchronousInputId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso.Inputs[Row Count Input 1]">
+                  synchronousInputId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion.Inputs[Row Count Input 1]">
                   <externalMetadataColumns />
                 </output>
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageTipoIngeso\DestinoStage"
+              refId="Package\OLTPaStageTipoDeduccion\DestinoStage"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -807,7 +806,7 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageTipoIngeso\DestinoStage.Connections[OleDbConnection]"
+                  refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   description="The OLE DB runtime connection used to access the database."
@@ -815,39 +814,39 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </connections>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input]"
+                  refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].Columns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[tipoDeduccion]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="tipoDeduccion"
-                      externalMetadataColumnId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[tipoDeduccion]" />
+                      externalMetadataColumnId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[tipoDeduccion]" />
                     <inputColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
                       cachedDataType="i4"
                       cachedName="idTipoDeduccion"
-                      externalMetadataColumnId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
+                      externalMetadataColumnId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionDIM]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionDIM]"
                       dataType="i4"
                       name="idTipoDeduccionDIM" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
                       dataType="i4"
                       name="idTipoDeduccionOg" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
@@ -857,22 +856,22 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\DestinoStage.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageTipoDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\DestinoStage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -881,7 +880,7 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageTipoIngeso\Lookup"
+              refId="Package\OLTPaStageTipoDeduccion\Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
@@ -937,7 +936,7 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]};#{Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[tipoDeduccion]};</property>
+                  name="ParameterMap">#{Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]};#{Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[tipoDeduccion]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -949,7 +948,7 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageTipoIngeso\Lookup.Connections[OleDbConnection]"
+                  refId="Package\OLTPaStageTipoDeduccion\Lookup.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   description="Connection manager used to access lookup data."
@@ -957,14 +956,14 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
               </connections>
               <inputs>
                 <input
-                  refId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input]"
+                  refId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input].Columns[idTipoDeduccion]"
                       cachedDataType="i4"
                       cachedName="idTipoDeduccion"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]">
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -977,12 +976,12 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input].Columns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input].Columns[tipoDeduccion]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="tipoDeduccion"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[tipoDeduccion]">
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[tipoDeduccion]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1000,38 +999,38 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
               </inputs>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1040,11 +1039,11 @@ where [refTable].[idTipoDeduccionOg] = ? and [refTable].[tipoDeduccion] = ?</pro
               </outputs>
             </component>
             <component
-              refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso"
+              refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="SourceOLTPTipoIngreso"
+              name="SourceOLTPTipoDeduccion"
               usesDispositions="true"
               version="7">
               <properties>
@@ -1093,7 +1092,7 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Connections[OleDbConnection]"
+                  refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLTP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLTP]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1101,38 +1100,38 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
               </connections>
               <outputs>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      externalMetadataColumnId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
+                      externalMetadataColumnId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
                       length="50"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
                       name="tipoDeduccion"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
                       dataType="i4"
                       name="idTipoDeduccion" />
                     <externalMetadataColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
@@ -1140,32 +1139,32 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output]"
+                  refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
                       name="tipoDeduccion" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1176,20 +1175,20 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
           </components>
           <paths>
             <path
-              refId="Package\OLTPaStageTipoIngeso.Paths[Lookup No Match Output]"
-              endId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso.Inputs[Row Count Input 1]"
+              refId="Package\OLTPaStageTipoDeduccion.Paths[Lookup No Match Output]"
+              endId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
-              startId="Package\OLTPaStageTipoIngeso\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\OLTPaStageTipoDeduccion\Lookup.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\OLTPaStageTipoIngeso.Paths[OLE DB Source Output]"
-              endId="Package\OLTPaStageTipoIngeso\Lookup.Inputs[Lookup Input]"
+              refId="Package\OLTPaStageTipoDeduccion.Paths[OLE DB Source Output]"
+              endId="Package\OLTPaStageTipoDeduccion\Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso.Outputs[OLE DB Source Output]" />
+              startId="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\OLTPaStageTipoIngeso.Paths[Row Count Output 1]"
-              endId="Package\OLTPaStageTipoIngeso\DestinoStage.Inputs[OLE DB Destination Input]"
+              refId="Package\OLTPaStageTipoDeduccion.Paths[Row Count Output 1]"
+              endId="Package\OLTPaStageTipoDeduccion\DestinoStage.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso.Outputs[Row Count Output 1]" />
+              startId="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1300,6 +1299,12 @@ inner join PlanillaOLTP.dbo.Trabajador as T on ND.idTrabajador = T.idTrabajador<
                       cachedName="fecha"
                       externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
                       lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].Columns[idTipoDeduccionDIM]"
+                      cachedDataType="i4"
+                      cachedName="idTipoDeduccionDIM"
+                      externalMetadataColumnId="Package\StageAOLAP\DestinoIngresoOlap.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionDIM]"
+                      lineageId="Package\StageAOLAP\SourceStageIngreso.Outputs[OLE DB Source Output].Columns[idTipoDeduccionDIM]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1383,7 +1388,8 @@ from DeduccionStage as Dst
 outer apply ( Select top 1 olap.IdTrabajadorDIM from PlanillaOLAP.dbo.Trabajador as olap  where  Dst.IdTrabajadorOg = olap.IdTrabajadorOg 
 Order By olap.idTrabajadorDIM DESC  ) as DimT
 outer apply (Select top 1 olap.idTipoDeduccionDIM from PlanillaOLAP.dbo.TipoDeduccion as olap where olap.idTipoDeduccionOG = Dst.idTipoDeduccion 
-ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
+ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD 
+where IdDeduccionOg not in (select idDeduccion from PlanillaOLAP.dbo.Deduccion)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1554,13 +1560,13 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\StageaOlapTipoIngreso"
+      DTS:refId="Package\StageaOlapTipoDeduccion"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{1214e885-1d97-4302-84d7-9271d14cf409}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="StageaOlapTipoIngreso"
+      DTS:ObjectName="StageaOlapTipoDeduccion"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -1568,11 +1574,11 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
           version="1">
           <components>
             <component
-              refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage"
+              refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="SourceTipoIngresoStage"
+              name="SourceTipoDeduccionStage"
               usesDispositions="true"
               version="7">
               <properties>
@@ -1617,7 +1623,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Connections[OleDbConnection]"
+                  refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLTP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLTP]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1625,71 +1631,71 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output]"
+                  refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
+                      externalMetadataColumnId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
                       length="50"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]"
                       name="tipoDeduccion"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
+                      externalMetadataColumnId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].ExternalColumns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="tipoDeduccion" />
                     <externalMetadataColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].ExternalColumns[idTipoDeduccion]"
                       dataType="i4"
                       name="idTipoDeduccion" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output]"
+                  refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       dataType="i4"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[idTipoDeduccion]"
                       name="idTipoDeduccion" />
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[tipoDeduccion]"
                       name="tipoDeduccion" />
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1698,11 +1704,11 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </outputs>
             </component>
             <component
-              refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP"
+              refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="TipoIngresoOLAP"
+              name="TipoDeduccionOLAP"
               usesDispositions="true"
               version="4">
               <properties>
@@ -1755,7 +1761,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Connections[OleDbConnection]"
+                  refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.PlanillaOLAP]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1763,39 +1769,39 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input]"
+                  refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].Columns[tipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].Columns[tipoDeduccion]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="tipoDeduccion"
-                      externalMetadataColumnId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]" />
+                      externalMetadataColumnId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[tipoDeduccion]" />
                     <inputColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].Columns[idTipoDeduccion]"
                       cachedDataType="i4"
                       cachedName="idTipoDeduccion"
-                      externalMetadataColumnId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
-                      lineageId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
+                      externalMetadataColumnId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
+                      lineageId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output].Columns[idTipoDeduccion]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionDIM]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionDIM]"
                       dataType="i4"
                       name="idTipoDeduccionDIM" />
                     <externalMetadataColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].ExternalColumns[idTipoDeduccionOg]"
                       dataType="i4"
                       name="idTipoDeduccionOg" />
                     <externalMetadataColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input].ExternalColumns[tipoDeduccion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
@@ -1805,22 +1811,22 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1831,10 +1837,10 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
           </components>
           <paths>
             <path
-              refId="Package\StageaOlapTipoIngreso.Paths[OLE DB Source Output]"
-              endId="Package\StageaOlapTipoIngreso\TipoIngresoOLAP.Inputs[OLE DB Destination Input]"
+              refId="Package\StageaOlapTipoDeduccion.Paths[OLE DB Source Output]"
+              endId="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage.Outputs[OLE DB Source Output]" />
+              startId="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1845,7 +1851,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{93bbb66a-ada1-4dd0-8875-96daf8c62819}"
-      DTS:From="Package\OLTPaStageIngreso"
+      DTS:From="Package\OLTPaStageDeduccion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\StageAOLAP" />
@@ -1853,34 +1859,26 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{f2deed70-d5c7-439f-b78c-6d9b143ed37d}"
-      DTS:From="Package\OLTPaStageTipoIngeso"
+      DTS:From="Package\OLTPaStageTipoDeduccion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\StageaOlapTipoIngreso" />
+      DTS:To="Package\StageaOlapTipoDeduccion" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{c81b5483-10d7-4acc-ad44-60c74899d650}"
-      DTS:From="Package\StageaOlapTipoIngreso"
+      DTS:From="Package\StageaOlapTipoDeduccion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\LimpiarTipoIngresoStage" />
+      DTS:To="Package\LimpiarTipoDeduccionStage" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{e9576319-446a-4eda-bc00-68c84a10853b}"
-      DTS:From="Package\LimpiarTipoIngresoStage"
+      DTS:From="Package\LimpiarTipoDeduccionStage"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\OLTPaStageIngreso" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
-      DTS:CreationName=""
-      DTS:DTSID="{7631977b-828d-4528-88eb-a4b6b3641315}"
-      DTS:From="Package\StageAOLAP"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 4"
-      DTS:To="Package\LimpiarIngresoStage" />
+      DTS:To="Package\OLTPaStageDeduccion" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1895,43 +1893,39 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="176,41.6"
-          Id="Package\LimpiarIngresoStage"
-          TopLeft="73,442" />
+          Size="209,42"
+          Id="Package\LimpiarTipoDeduccionStage"
+          TopLeft="486,205" />
         <NodeLayout
-          Size="196,41.6"
-          Id="Package\LimpiarTipoIngresoStage"
-          TopLeft="60,208" />
+          Size="185,42"
+          Id="Package\OLTPaStageDeduccion"
+          TopLeft="504,287" />
         <NodeLayout
-          Size="172,41.6"
-          Id="Package\OLTPaStageIngreso"
-          TopLeft="78,290" />
+          Size="205,42"
+          Id="Package\OLTPaStageTipoDeduccion"
+          TopLeft="487,57" />
         <NodeLayout
-          Size="188,41.6"
-          Id="Package\OLTPaStageTipoIngeso"
-          TopLeft="61,60" />
-        <NodeLayout
-          Size="136.8,41.6"
+          Size="137,42"
           Id="Package\StageAOLAP"
-          TopLeft="94,367" />
+          TopLeft="524.166666666667,364.833333333333" />
         <NodeLayout
-          Size="188.8,41.6"
-          Id="Package\StageaOlapTipoIngreso"
-          TopLeft="64,129" />
+          Size="202,42"
+          Id="Package\StageaOlapTipoDeduccion"
+          TopLeft="490,126" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="163.25,332">
+          TopLeft="594.583333333333,329">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35"
+              EndConnector="0,35.8333333333333"
               Start="0,0"
-              End="0,27.5">
+              End="0,28.3333333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.5" />
+                    End="0,28.3333333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1942,18 +1936,18 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="156.7,101.6">
+          TopLeft="590.25,99">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,27.4"
+              EndConnector="0,27"
               Start="0,0"
-              End="0,19.9">
+              End="0,19.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.9" />
+                    End="0,19.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1964,7 +1958,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="158.25,171">
+          TopLeft="590.75,168">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1986,7 +1980,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="161,250">
+          TopLeft="593.5,247">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2006,141 +2000,123 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="161.75,409">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33"
-              Start="0,0"
-              End="0,25.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\OLTPaStageIngreso">
+    design-time-name="Package\OLTPaStageDeduccion">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="140,41.6"
-          Id="Package\OLTPaStageIngreso\DestinoStage"
-          TopLeft="233,391" />
+          Size="140,42"
+          Id="Package\OLTPaStageDeduccion\DestinoStage"
+          TopLeft="308,391" />
         <NodeLayout
-          Size="172,41.6"
-          Id="Package\OLTPaStageIngreso\SourceOLTPIngreso"
+          Size="113,42"
+          Id="Package\OLTPaStageDeduccion\Lookup"
+          TopLeft="367,182" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\OLTPaStageDeduccion\SourceOLTPDeduccion"
           TopLeft="331,67" />
         <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\OLTPaStageIngreso\CountInsertIngreso"
-          TopLeft="230,285" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\OLTPaStageIngreso\Lookup"
-          TopLeft="367,187" />
+          Size="183,42"
+          Id="Package\OLTPaStageDeduccion\CountInsertDeduccion"
+          TopLeft="304,294" />
         <EdgeLayout
-          Id="Package\OLTPaStageIngreso.Paths[Row Count Output 1]"
-          TopLeft="314.8,326.6">
+          Id="Package\OLTPaStageDeduccion.Paths[Row Count Output 1]"
+          TopLeft="395.5,336">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-11.8,64.4"
+              EndConnector="-17.5,55"
               Start="0,0"
-              End="-11.8,56.9">
+              End="-17.5,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.2" />
+                    End="0,23.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.2"
-                    Point2="0,32.2"
-                    Point3="-4,32.2" />
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="-4,27.5" />
                   <mssgle:LineSegment
-                    End="-7.80000000000001,32.2" />
+                    End="-13.5,27.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-7.80000000000001,32.2"
-                    Point2="-11.8,32.2"
-                    Point3="-11.8,36.2" />
+                    Point1="-13.5,27.5"
+                    Point2="-17.5,27.5"
+                    Point3="-17.5,31.5" />
                   <mssgle:LineSegment
-                    End="-11.8,56.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\OLTPaStageIngreso.Paths[OLE DB Source Output]"
-          TopLeft="420.25,109">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,78"
-              Start="0,0"
-              End="0,70.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,70.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\OLTPaStageIngreso.Paths[Lookup No Match Output]"
-          TopLeft="423.5,229">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-108.5,56"
-              Start="0,0"
-              End="-108.5,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24"
-                    Point2="0,28"
-                    Point3="-4,28" />
-                  <mssgle:LineSegment
-                    End="-104.5,28" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-104.5,28"
-                    Point2="-108.5,28"
-                    Point3="-108.5,32" />
-                  <mssgle:LineSegment
-                    End="-108.5,48.5" />
+                    End="-17.5,47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-110.05638671875,33,111.6127734375,11.609375"
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\OLTPaStageDeduccion.Paths[OLE DB Source Output]"
+          TopLeft="423.5,109">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73"
+              Start="0,0"
+              End="0,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\OLTPaStageDeduccion.Paths[Lookup No Match Output]"
+          TopLeft="423.5,224">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-28,70"
+              Start="0,0"
+              End="-28,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31"
+                    Point2="0,35"
+                    Point3="-4,35" />
+                  <mssgle:LineSegment
+                    End="-24,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24,35"
+                    Point2="-28,35"
+                    Point3="-28,39" />
+                  <mssgle:LineSegment
+                    End="-28,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-69.80638671875,40,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2148,7 +2124,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageIngreso\DestinoStage">
+    design-time-name="Package\OLTPaStageDeduccion\DestinoStage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2161,60 +2137,60 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageIngreso\SourceOLTPIngreso">
+    design-time-name="Package\OLTPaStageDeduccion\Lookup">
     <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DeduccionStage]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageIngreso\Lookup">
+    design-time-name="Package\OLTPaStageDeduccion\SourceOLTPDeduccion">
     <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Deduccion]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\OLTPaStageTipoIngeso">
+    design-time-name="Package\OLTPaStageTipoDeduccion">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="140.8,41.6"
-          Id="Package\OLTPaStageTipoIngeso\DestinoStage"
-          TopLeft="281.666666666667,381.666666666667" />
+          Size="141,42"
+          Id="Package\OLTPaStageTipoDeduccion\DestinoStage"
+          TopLeft="292.666666666667,375.666666666667" />
         <NodeLayout
-          Size="192,41.6"
-          Id="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso"
+          Size="205,42"
+          Id="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion"
           TopLeft="360,60" />
         <NodeLayout
-          Size="193.6,41.6"
-          Id="Package\OLTPaStageTipoIngeso\ContarInsertTipoIngreso"
+          Size="207,42"
+          Id="Package\OLTPaStageTipoDeduccion\ContarInsertTipoDeduccion"
           TopLeft="257.5,282.5" />
         <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\OLTPaStageTipoIngeso\Lookup"
+          Size="113,42"
+          Id="Package\OLTPaStageTipoDeduccion\Lookup"
           TopLeft="403,186" />
         <EdgeLayout
-          Id="Package\OLTPaStageTipoIngeso.Paths[OLE DB Source Output]"
-          TopLeft="457.75,102">
+          Id="Package\OLTPaStageTipoDeduccion.Paths[OLE DB Source Output]"
+          TopLeft="461,102">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2235,14 +2211,14 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\OLTPaStageTipoIngeso.Paths[Lookup No Match Output]"
+          Id="Package\OLTPaStageTipoDeduccion.Paths[Lookup No Match Output]"
           TopLeft="459.5,228">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-105,54.5"
+              EndConnector="-98.5,54.5"
               Start="0,0"
-              End="-105,47">
+              End="-98.5,47">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -2253,37 +2229,37 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
                     Point2="0,27.25"
                     Point3="-4,27.25" />
                   <mssgle:LineSegment
-                    End="-101,27.25" />
+                    End="-94.5,27.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="-101,27.25"
-                    Point2="-105,27.25"
-                    Point3="-105,31.25" />
+                    Point1="-94.5,27.25"
+                    Point2="-98.5,27.25"
+                    Point3="-98.5,31.25" />
                   <mssgle:LineSegment
-                    End="-105,47" />
+                    End="-98.5,47" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-108.30638671875,32.25,111.6127734375,11.609375"
+              BoundingBox="-105.05638671875,32.25,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\OLTPaStageTipoIngeso.Paths[Row Count Output 1]"
-          TopLeft="353.333333333333,324.5">
+          Id="Package\OLTPaStageTipoDeduccion.Paths[Row Count Output 1]"
+          TopLeft="362.083333333333,324.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57.1666666666668"
+              EndConnector="0,51.166666666667"
               Start="0,0"
-              End="0,49.6666666666668">
+              End="0,43.666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.6666666666668" />
+                    End="0,43.666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2296,7 +2272,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageTipoIngeso\DestinoStage">
+    design-time-name="Package\OLTPaStageTipoDeduccion\DestinoStage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2309,7 +2285,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageTipoIngeso\SourceOLTPTipoIngreso">
+    design-time-name="Package\OLTPaStageTipoDeduccion\SourceOLTPTipoDeduccion">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2322,12 +2298,12 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\OLTPaStageTipoIngeso\Lookup">
+    design-time-name="Package\OLTPaStageTipoDeduccion\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2337,7 +2313,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2348,13 +2324,13 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     design-time-name="Package\StageAOLAP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="172,41.6"
+          Size="172,42"
           Id="Package\StageAOLAP\DestinoIngresoOlap"
           TopLeft="372,171" />
         <NodeLayout
-          Size="174.4,41.6"
+          Size="174,42"
           Id="Package\StageAOLAP\SourceStageIngreso"
           TopLeft="370,62" />
         <EdgeLayout
@@ -2376,7 +2352,9 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2404,32 +2382,32 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\StageaOlapTipoIngreso">
+    design-time-name="Package\StageaOlapTipoDeduccion">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="193.6,41.6"
-          Id="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage"
-          TopLeft="333,60" />
-        <NodeLayout
-          Size="160,41.6"
-          Id="Package\StageaOlapTipoIngreso\TipoIngresoOLAP"
+          Size="173,42"
+          Id="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP"
           TopLeft="351.4,172.2" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage"
+          TopLeft="333,60" />
         <EdgeLayout
-          Id="Package\StageaOlapTipoIngreso.Paths[OLE DB Source Output]"
-          TopLeft="430.6,101.6">
+          Id="Package\StageaOlapTipoDeduccion.Paths[OLE DB Source Output]"
+          TopLeft="437.2,102">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,70.6"
+              EndConnector="0,70.2"
               Start="0,0"
-              End="0,63.1">
+              End="0,62.7">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,63.1" />
+                    End="0,62.7" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2442,7 +2420,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\StageaOlapTipoIngreso\SourceTipoIngresoStage">
+    design-time-name="Package\StageaOlapTipoDeduccion\SourceTipoDeduccionStage">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2455,7 +2433,7 @@ ORDER BY olap.idTipoDeduccionDIM DESC) as DimTD</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\StageaOlapTipoIngreso\TipoIngresoOLAP">
+    design-time-name="Package\StageaOlapTipoDeduccion\TipoDeduccionOLAP">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
