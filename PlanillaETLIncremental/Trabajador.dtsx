@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{6064473C-6672-4978-AA25-AB59AAB5C9D1}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{A89BCF7C-EBED-4551-88FF-55AE4A2B8310}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -47,6 +47,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{3B9E10AF-2CA4-436A-8B2C-06157AF6EB1C}"
+      DTS:ObjectName="Fecha">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">12:00:00 AM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -63,6 +74,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="CountInsertUpdatesTrabajador">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67AA3CBD-E909-4F7C-A468-2B9A231691E6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Variable">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
@@ -1000,10 +1020,11 @@ where [refTable].[idTrabajadorOg] = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select T.idTrabajador,T.nombre as Nombre, T.apellido as Apellido ,T.nombre+' '+T.apellido as NombreCompleto, T.salario,T.porcentajeComision,c.idCargo as idCargo, c.nombreCargo,D.idDepartamento,D.nombreDepartamento
-from  PlanillaOLTP.dbo.Trabajador as T
-INNER JOIN PlanillaOLTP.dbo.Cargo as C on T.idCargo = C.idCargo
-INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartamento</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        T.idTrabajador, T.nombre AS Nombre, T.apellido AS Apellido, T.nombre + ' ' + T.apellido AS NombreCompleto, T.salario, T.porcentajeComision, C.idCargo, C.nombreCargo, D.idDepartamento, D.nombreDepartamento
+FROM            Trabajador AS T INNER JOIN
+                         Cargo AS C ON T.idCargo = C.idCargo INNER JOIN
+                         Departamento AS D ON D.idDepartamento = C.idDepartamento
+WHERE        (T.FechaModificacion &gt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1024,7 +1045,7 @@ INNER JOIN PlanillaOLTP.dbo.Departamento as D on D.idDepartamento = C.idDepartam
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"0:Input",{3B9E10AF-D35B-436A-8B2C-06157AF6EB1C};</property>
               </properties>
               <connections>
                 <connection
@@ -1807,6 +1828,10 @@ from TrabajadorStage</property>
           Id="Package\LimpiarStageTrabajador"
           TopLeft="384,290" />
         <NodeLayout
+          Size="147,42"
+          Id="Package\LogTrabajador"
+          TopLeft="413,391" />
+        <NodeLayout
           Size="169,42"
           Id="Package\PlanillaOLTPaStage"
           TopLeft="389,75" />
@@ -1858,10 +1883,6 @@ from TrabajadorStage</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="147,42"
-          Id="Package\LogTrabajador"
-          TopLeft="413,391" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="483,332">
@@ -2011,9 +2032,7 @@ from TrabajadorStage</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2035,9 +2054,7 @@ from TrabajadorStage</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2059,9 +2076,7 @@ from TrabajadorStage</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
